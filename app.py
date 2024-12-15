@@ -44,41 +44,11 @@ def callback():
 def handle_message(event):
     message = text=event.message.text
     if re.match('今天是我的生日',message):
-        imagemap_message = ImagemapSendMessage(
-            base_url='https://github.com/AndyMa0612/linebot1/raw/main/%E8%83%8C%E6%99%AF.jpg',
-            alt_text='組圖訊息',
-            base_size=BaseSize(height=2000, width=2000),
-            actions=[
-                URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
-                    area=ImagemapArea(
-                        x=0, y=0, width=1000, height=1000
-                    )
-                ),
-                URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
-                    area=ImagemapArea(
-                        x=1000, y=0, width=1000, height=1000
-                    )
-                ),
-                URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
-                    area=ImagemapArea(
-                        x=0, y=1000, width=1000, height=1000
-                    )
-                ),
-                URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
-                    area=ImagemapArea(
-                        x=1000, y=1000, width=1000, height=1000
-                    )
-                )
-            ]
+        image_message = ImageSendMessage(
+            original_content_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%A6%AE%E7%89%A9%E7%9B%92.jpg',
+            preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg'
         )
-        line_bot_api.reply_message(
-            event.reply_token,
-            [imagemap_message, TextSendMessage(text="生日快樂")]
-        )
+        line_bot_api.reply_message(event.reply_token, image_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
