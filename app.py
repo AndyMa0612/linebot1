@@ -45,7 +45,7 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('音樂片',message):
         video_message = VideoSendMessage(
-            original_content_url='https://github.com/AndyMa0612/linebot1/blob/main/%E5%96%9C%E6%AD%A1%E4%BD%A0%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%97%9B%E8%8B%A6.mp4',
+            original_content_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%96%9C%E6%AD%A1%E4%BD%A0%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%97%9B%E8%8B%A6.mp4',
             preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%9C%96%E7%89%87.png'
         )
         line_bot_api.reply_message(event.reply_token, video_message)
