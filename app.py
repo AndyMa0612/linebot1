@@ -45,8 +45,10 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('音樂片',message):
         video_message = VideoSendMessage(
-            original_content_url='https://github.com/AndyMa0612/linebot1/blob/main/Endless%20Tears%20feat.%20%E4%B8%AD%E6%9D%91%E8%88%9E%E5%AD%90%20-%20Love%20is%20a%20beautiful%20pain%E5%96%9C%E6%AD%A1%E4%BD%A0%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%97%9B%E8%8B%A6%E4%B8%AD%E6%97%A5%E5%8B%95%E6%85%8B%E6%AD%8C%E8%A9%9ELyrics.mp4',
-            preview_image_url='https://github.com/AndyMa0612/linebot1/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-12-15%20114636.png'
+            original_content_url='https://raw.githubusercontent.com/AndyMa0612/linebot1/main/Endless%20Tears%20feat.%20%E4%B8%AD%E6%9D%91%E8%88%9E%E5%AD%90%20-%20Love%20is%20a%20beautiful%20pain%E5%96%9C%E6%AD%A1%E4%BD%A0%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%97%9B%E8%8B%A6%E4%B8%AD%E6%97%A5%E5%8B%95%E6%85%8B%E6%AD%8C%E8%A9%9ELyrics.mp4
+',
+            preview_image_url='https://raw.githubusercontent.com/AndyMa0612/linebot1/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-12-15%20114636.png
+'
         )
         line_bot_api.reply_message(event.reply_token, video_message)
     else:
