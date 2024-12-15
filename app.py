@@ -43,15 +43,44 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('音樂片',message):
-        video_message = VideoSendMessage(
-            original_content_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%96%9C%E6%AD%A1%E4%BD%A0%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%97%9B%E8%8B%A6.mp4',
-            preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%9C%96%E7%89%87.png'
+    if re.match('今天是我的生日',message):
+        imagemap_message = ImagemapSendMessage(
+            base_url='https://github.com/AndyMa0612/linebot1/raw/main/%E8%83%8C%E6%99%AF.jpg',
+            alt_text='組圖訊息',
+            base_size=BaseSize(height=2000, width=2000),
+            actions=[
+                URIImagemapAction(
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
+                    area=ImagemapArea(
+                        x=0, y=0, width=1000, height=1000
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A52.jpg',
+                    area=ImagemapArea(
+                        x=1000, y=0, width=1000, height=1000
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A53.jpg',
+                    area=ImagemapArea(
+                        x=0, y=1000, width=1000, height=1000
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A54.jpg',
+                    area=ImagemapArea(
+                        x=1000, y=1000, width=1000, height=1000
+                    )
+                )
+            ]
         )
-        line_bot_api.reply_message(event.reply_token, video_message)
+        line_bot_api.reply_message(
+            event.reply_token,
+            [imagemap_message, TextSendMessage(text="生日快樂")]
+        )
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="抱歉，沒有這類型的影片"))
-
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
 import os
 if __name__ == "__main__":
