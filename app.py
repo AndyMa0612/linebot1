@@ -14,7 +14,7 @@ import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('JMCPBQudpqEoC4PYuKzq5n5keshLPWyw1xVDWNL3w31JlRYHb6YxTAd7fhQaDqfZ38i3OEKUEVmPbKkA7d2qrSstvGVxxOvJXel+l6LdC8JXZKzZnzyj3Rdz5h5973ZozJxk84DoVHfeN2op+ONCCAdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('GHY2NQzOGaVPecTUi1IjgFAlsZaZ1uWE0z8VzPQwpQcHuoZ260TfDg6zMuu+CZSi38i3OEKUEVmPbKkA7d2qrSstvGVxxOvJXel+l6LdC8LbCy9HuvfcnX+fyupnmW3v0IOIpqmmK5mYH1HCn75tbAdB04t89/1O/w1cDnyilFU=')
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('2d76a3d9752771ac55a74d90e1ff6e2e')
 
