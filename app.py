@@ -56,19 +56,19 @@ def handle_message(event):
                     )
                 ),
                 URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A52.jpg',
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
                     area=ImagemapArea(
                         x=1000, y=0, width=1000, height=1000
                     )
                 ),
                 URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A53.jpg',
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
                     area=ImagemapArea(
                         x=0, y=1000, width=1000, height=1000
                     )
                 ),
                 URIImagemapAction(
-                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A54.jpg',
+                    link_uri='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
                     area=ImagemapArea(
                         x=1000, y=1000, width=1000, height=1000
                     )
