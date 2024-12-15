@@ -45,14 +45,14 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('熱門音樂',message):
         audio_message = AudioSendMessage(
-            original_content_url='https://drive.google.com/file/d/1YVFY28fQDJVe0GqtYo0wHnPNbLPnrUZz/view?usp=sharing',
-            duration=81000
+            original_content_url='https://drive.google.com/uc?id=1YVFY28fQDJVe0GqtYo0wHnPNbLPnrUZz&export=download',
+            duration=30000
         )
         line_bot_api.reply_message(event.reply_token, audio_message)
     elif re.match('放鬆音樂',message):
         audio_message = AudioSendMessage(
-            original_content_url='https://drive.google.com/file/d/1ihqsey6L_rVw5ozaLp0zPi4zKDIf1wTE/view?usp=sharing',
-            duration=81000
+            original_content_url='https://drive.google.com/uc?id=1ihqsey6L_rVw5ozaLp0zPi4zKDIf1wTE&export=download',
+            duration=30000
         )
         line_bot_api.reply_message(event.reply_token, audio_message)
     else:
