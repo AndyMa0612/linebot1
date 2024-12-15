@@ -45,8 +45,8 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('音樂片',message):
         video_message = VideoSendMessage(
-            original_content_url='Endless Tears feat. 中村舞子 - Love is a beautiful pain喜歡你真的好痛苦中日動態歌詞Lyrics.mp4',
-            preview_image_url='螢幕擷取畫面 2024-12-15 114636.png'
+            original_content_url='/喜歡你真的好痛苦中日動態歌詞.mp4',
+            preview_image_url='/圖片.png'
         )
         line_bot_api.reply_message(event.reply_token, video_message)
     else:
