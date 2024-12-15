@@ -43,20 +43,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('熱門音樂',message):
-        audio_message = AudioSendMessage(
-            original_content_url='https://drive.google.com/uc?id=1YVFY28fQDJVe0GqtYo0wHnPNbLPnrUZz&export=download',
-            duration=30000
+    if re.match('音樂片',message):
+        video_message = VideoSendMessage(
+            original_content_url='https://github.com/AndyMa0612/linebot1/blob/main/%E5%96%9C%E6%AD%A1%E4%BD%A0%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%97%9B%E8%8B%A6.mp4',
+            preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%9C%96%E7%89%87.png'
         )
-        line_bot_api.reply_message(event.reply_token, audio_message)
-    elif re.match('放鬆音樂',message):
-        audio_message = AudioSendMessage(
-            original_content_url='https://drive.google.com/uc?id=1ihqsey6L_rVw5ozaLp0zPi4zKDIf1wTE&export=download',
-            duration=30000
-        )
-        line_bot_api.reply_message(event.reply_token, audio_message)
+        line_bot_api.reply_message(event.reply_token, video_message)
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="抱歉，沒有這類型的影片"))
 #主程式
 import os
 if __name__ == "__main__":
