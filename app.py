@@ -45,8 +45,8 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('今天是我的生日',message):
         image_message = ImageSendMessage(
-            original_content_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%A6%AE%E7%89%A9%E7%9B%92.jpg',
-            preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg'
+            original_content_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
+            preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%A6%AE%E7%89%A9%E7%9B%92.jpg'
         )
         line_bot_api.reply_message(event.reply_token, image_message)
     else:
