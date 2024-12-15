@@ -43,22 +43,18 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('找美食',message):
-        location_message = LocationSendMessage(
-            title='海之蚵-沙鹿靜宜店',
-            address='台中',
-            latitude=24.226421223963353,
-            longitude=120.57553136241279
+    if re.match('熱門音樂',message):
+        audio_message = AudioSendMessage(
+            original_content_url='https://github.com/AndyMa0612/linebot1/blob/main/OneRepublic%20-%20Nobody%20(from%20Kaiju%20No.%208)%20%5BOfficial%20Music%20Video%5D.mp3',
+            duration=81000
         )
-        line_bot_api.reply_message(event.reply_token, location_message)
-    elif re.match('找景點',message):
-        location_message = LocationSendMessage(
-            title='望高寮觀景平台',
-            address='台中',
-            latitude=24.144852430197002,
-            longitude=120.57835359990658
+        line_bot_api.reply_message(event.reply_token, audio_message)
+    elif re.match('放鬆音樂',message):
+        audio_message = AudioSendMessage(
+            original_content_url='https://github.com/AndyMa0612/linebot1/blob/main/OneRepublic%20-%20Nobody%20(from%20Kaiju%20No.%208)%20%5BOfficial%20Music%20Video%5D.mp3',
+            duration=81000
         )
-        line_bot_api.reply_message(event.reply_token, location_message)
+        line_bot_api.reply_message(event.reply_token, audio_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
