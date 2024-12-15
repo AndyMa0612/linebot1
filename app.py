@@ -43,19 +43,22 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('心情好',message):
-        # 貼圖查詢：https://developers.line.biz/en/docs/messaging-api/sticker-list/#specify-sticker-in-message-object
-        sticker_message = StickerSendMessage(
-            package_id='446',
-            sticker_id='1989'
+    if re.match('找美食',message):
+        location_message = LocationSendMessage(
+            title='海之蚵-沙鹿靜宜店',
+            address='台中',
+            latitude=24.226421223963353,
+            longitude=120.57553136241279
         )
-        line_bot_api.reply_message(event.reply_token, sticker_message)
-    elif re.match('心情不好',message):
-        sticker_message = StickerSendMessage(
-            package_id='446',
-            sticker_id='2018'
+        line_bot_api.reply_message(event.reply_token, location_message)
+    elif re.match('找景點',message):
+        location_message = LocationSendMessage(
+            title='望高寮觀景平台',
+            address='台中',
+            latitude=24.144852430197002,
+            longitude=120.57835359990658
         )
-        line_bot_api.reply_message(event.reply_token, sticker_message)
+        line_bot_api.reply_message(event.reply_token, location_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
