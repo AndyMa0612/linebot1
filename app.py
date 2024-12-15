@@ -10,22 +10,15 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
 line_bot_api = LineBotApi('JMCPBQudpqEoC4PYuKzq5n5keshLPWyw1xVDWNL3w31JlRYHb6YxTAd7fhQaDqfZ38i3OEKUEVmPbKkA7d2qrSstvGVxxOvJXel+l6LdC8JXZKzZnzyj3Rdz5h5973ZozJxk84DoVHfeN2op+ONCCAdB04t89/1O/w1cDnyilFU=')
-
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('2d76a3d9752771ac55a74d90e1ff6e2e')
 
-from datetime import datetime
-import pytz
-
-tz = pytz.timezone('Asia/Taipei')
-time = datetime.now(tz).strftime("%Y/%m/%d %H:%M")
-
-line_bot_api.push_message('U0b6441bd0ff804fe3f87793461cf615f', TextSendMessage(text=f'您好,目前時間是 {time} ，請問需要什麼服務呢?'))
+line_bot_api.push_message('U0b6441bd0ff804fe3f87793461cf615f', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -49,15 +42,22 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    user_input = event.message.text
-    if user_input == "天氣":
-        reply = "請稍等，我幫您查詢天氣資訊！"
+    message = text=event.message.text
+    if re.match('心情好',message):
+        # 貼圖查詢：https://developers.line.biz/en/docs/messaging-api/sticker-list/#specify-sticker-in-message-object
+        sticker_message = StickerSendMessage(
+            package_id='446',
+            sticker_id='1989'
+        )
+        line_bot_api.reply_message(event.reply_token, sticker_message)
+    elif re.match('心情不好',message):
+        sticker_message = StickerSendMessage(
+            package_id='446',
+            sticker_id='2018'
+        )
+        line_bot_api.reply_message(event.reply_token, sticker_message)
     else:
-        reply = "很抱歉，我目前無法理解這個內容。"
-    
-    message = TextSendMessage(text=reply)
-    line_bot_api.reply_message(event.reply_token, message)
-
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
 import os
 if __name__ == "__main__":
