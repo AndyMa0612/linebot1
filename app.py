@@ -20,8 +20,10 @@ line_bot_api = LineBotApi('JMCPBQudpqEoC4PYuKzq5n5keshLPWyw1xVDWNL3w31JlRYHb6YxT
 handler = WebhookHandler('2d76a3d9752771ac55a74d90e1ff6e2e')
 
 from datetime import datetime
+import pytz
 
-time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+tz = pytz.timezone('Asia/Taipei')
+time = datetime.now(tz).strftime("%Y/%m/%d %H:%M")
 
 line_bot_api.push_message('U0b6441bd0ff804fe3f87793461cf615f', TextSendMessage(text=f'您好,目前時間是 {time} ，請問需要什麼服務呢?'))
 
