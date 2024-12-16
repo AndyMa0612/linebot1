@@ -43,12 +43,39 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('今天是我的生日',message):
-        image_message = ImageSendMessage(
-            original_content_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%94%9F%E6%97%A51.jpg',
-            preview_image_url='https://github.com/AndyMa0612/linebot1/raw/main/%E7%A6%AE%E7%89%A9%E7%9B%92.jpg'
+    if re.match('推薦餐廳',message):
+        imagemap_message = ImagemapSendMessage(
+            base_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%90%84%E5%BC%8F%E6%96%99%E7%90%86.png',
+            alt_text='組圖訊息',
+            base_size=BaseSize(height=2000, width=2000),
+            actions=[
+                URIImagemapAction(
+                    link_uri='https://www.popdaily.com.tw/search/%23%E6%97%A5%E5%BC%8F%E6%96%99%E7%90%86?filter=ALL&sort=RELEVANT',
+                    area=ImagemapArea(
+                        x=0, y=0, width=1000, height=1000
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='https://www.popdaily.com.tw/search/%23%E8%A5%BF%E5%BC%8F%E6%96%99%E7%90%86?filter=ALL&sort=RELEVANT',
+                    area=ImagemapArea(
+                        x=1000, y=0, width=1000, height=1000
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='https://www.popdaily.com.tw/search/%23%E4%B8%AD%E5%BC%8F%E6%96%99%E7%90%86?filter=ALL&sort=RELEVANT',
+                    area=ImagemapArea(
+                        x=0, y=1000, width=1000, height=1000
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='https://www.popdaily.com.tw/search/%23%E6%B3%95%E5%BC%8F%E6%96%99%E7%90%86?filter=ALL&sort=RELEVANT',
+                    area=ImagemapArea(
+                        x=1000, y=1000, width=1000, height=1000
+                    )
+                )
+            ]
         )
-        line_bot_api.reply_message(event.reply_token, image_message)
+        line_bot_api.reply_message(event.reply_token, imagemap_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
