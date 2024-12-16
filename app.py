@@ -50,12 +50,12 @@ def handle_message(event):
                 text='無敵好吃牛肉麵 * 1 ，總價NT200',
                 actions=[
                     PostbackAction(
-                        label='喜歡',
+                        label='要',
                         display_text='訂單已確認，謝謝您的購買！',
                         data='action=其實不喜歡'
                     ),
                     MessageAction(
-                        label='讚',
+                        label='不要',
                         text='已取消訂單，謝謝您的光臨！'
                     )
                 ]
