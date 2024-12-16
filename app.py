@@ -1,63 +1,77 @@
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime
-import pytz
-import time
-from linebot import LineBotApi
-from linebot.models import TextSendMessage
+# -*- coding: utf-8 -*-
 
-# LINE Bot 設定
-LINE_ACCESS_TOKEN = "IwKLag3CEKNJmRD6fsALE00TihFGzIhjngMa8blDi4ftHaWKeECZ+G7NI/iAHFvWJQC8fmkdWVait1xSE4KHRAGthUvPKC/kX4QnPM0KScuCd+dZnvJFgQnTEuZgjATeziF6/VZJyOcj+WjmkLwWIQdB04t89/1O/w1cDnyilFU="
-USER_ID = "U251508da6b8209d394d4cb9fc359673a"
-line_bot_api = LineBotApi(LINE_ACCESS_TOKEN)
+#載入LineBot所需要的套件
+from flask import Flask, request, abort
 
-# 爬蟲 URL
-url = "https://wol.gg/stats/tw/%E5%8F%AF%E5%8F%A3%E9%9B%9E%E8%82%89%E9%A3%AF-tw2/"
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import *
+import re
+app = Flask(__name__)
 
-pre_game = None
-tz = pytz.timezone('Asia/Taipei')
+# 必須放上自己的Channel Access Token
+line_bot_api = LineBotApi('GHY2NQzOGaVPecTUi1IjgFAlsZaZ1uWE0z8VzPQwpQcHuoZ260TfDg6zMuu+CZSi38i3OEKUEVmPbKkA7d2qrSstvGVxxOvJXel+l6LdC8LbCy9HuvfcnX+fyupnmW3v0IOIpqmmK5mYH1HCn75tbAdB04t89/1O/w1cDnyilFU=')
+# 必須放上自己的Channel Secret
+handler = WebhookHandler('2d76a3d9752771ac55a74d90e1ff6e2e')
 
-def send_line_message(message):
+line_bot_api.push_message('U0b6441bd0ff804fe3f87793461cf615f', TextSendMessage(text='你可以開始了'))
+
+# 監聽所有來自 /callback 的 Post Request
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
     try:
-        line_bot_api.push_message(USER_ID, TextSendMessage(text=message))
-    except Exception as e:
-        print(f"LINE 訊息發送失敗: {e}")
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
 
-while True:
-    response = requests.get(url)
+    return 'OK'
 
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        result = soup.find(id="level")
-
-        cur_game = None
-
-        if result is not None:
-            cur_game = result.text.strip()
-            cur_game = cur_game.split("on ")[1]
-            cur_game = datetime.strptime(cur_game, "%d %b %Y")
-            cur_game = cur_game.strftime("%Y/%m/%d")
-        else:
-            print("未找到 id='level' 的元素")
-
-        cur_time = datetime.now(tz).strftime("%Y/%m/%d %H:%M")
-
-        if pre_game is None:
-            pre_game = cur_game
-            start_message = f"開始...時間為 : {cur_time}"
-            print(start_message)
-            send_line_message(start_message)
-        elif pre_game != cur_game:
-            finish_message = f"打完時間 : {cur_time}"
-            print(finish_message)
-            send_line_message(finish_message)
-            pre_game = cur_game
-
-        time.sleep(60)
-
+#訊息傳遞區塊
+##### 基本上程式編輯都在這個function #####
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    message = text=event.message.text
+    if re.match('推薦景點',message):
+        buttons_template_message = TemplateSendMessage(
+        alt_text='這是樣板傳送訊息',
+        template=ButtonsTemplate(
+            thumbnail_image_url='https://i.imgur.com/0IKFpMG.jpeg',
+            title='台中望高寮',
+            text='選單功能－TemplateSendMessage',
+            actions=[
+                PostbackAction(
+                    label='想了解資訊',
+                    display_text='我想了解',
+                    data='臺中市南屯區中台路'
+                ),
+                MessageAction(
+                    label='想知道那邊可以幹嘛',
+                    text='為觀看夕陽西下、夜景的好去處，附近的人常將望高寮稱為「東海古堡」。'
+                ),
+                URIAction(
+                    label='地圖位置',
+                    uri='https://www.google.com/maps?s=web&lqi=CgnmnJvpq5jlr65I5Iblk82CgIAIWhkQABABEAIYABgBGAIiC-acmyDpq5gg5a-ukgESdG91cmlzdF9hdHRyYWN0aW9umgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVF5TW5OeFVqUlJSUkFCqgFEEAEqDyIL5pybIOmrmCDlr64oRTIeEAEiGiVDROdMvSvBqWNkmDIgcjpyFgL6TMDUhobaMg8QAiIL5pybIOmrmCDlr676AQQIABAZ&vet=12ahUKEwjv0a6Az6yKAxVZgq8BHZOnCeYQ1YkKegQIIBAB..i&cs=0&um=1&ie=UTF-8&fb=1&gl=tw&sa=X&geocode=KRFoFrP3Pmk0MU45sK7I91Ji&daddr=408%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E4%B8%AD%E5%8F%B0%E8%B7%AF601%E8%99%9F'
+                )
+            ]
+        )
+    )
+        line_bot_api.reply_message(event.reply_token, buttons_template_message)
     else:
-        error_message = f"請求失敗，狀態碼: {response.status_code}"
-        print(error_message)
-        send_line_message(error_message)
-        time.sleep(60)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
+#主程式
+import os
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
