@@ -45,7 +45,7 @@ def handle_message(event):
     message = event.message.text
     if re.match('推薦餐廳',message):
         imagemap_message = ImagemapSendMessage(
-            base_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%90%84%E5%BC%8F%E6%96%99%E7%90%86.png',
+            base_url='https://i.imgur.com/N8lk6Zl.png',
             alt_text='組圖訊息',
             base_size=BaseSize(height=2000, width=2000),
             actions=[
