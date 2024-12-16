@@ -42,7 +42,7 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = text=event.message.text
+    message = event.message.text
     if re.match('推薦餐廳',message):
         imagemap_message = ImagemapSendMessage(
             base_url='https://github.com/AndyMa0612/linebot1/raw/main/%E5%90%84%E5%BC%8F%E6%96%99%E7%90%86.png',
