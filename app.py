@@ -14,11 +14,11 @@ import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('uqn8F5AIftKxhnBJq+76T3YazN5AWYR+VxJrd68V6scH0EXgWzUzKiGMmGNXBn5u38i3OEKUEVmPbKkA7d2qrSstvGVxxOvJXel+l6LdC8KcxrlK1fuiS3C0iZu0CCV5ILLU1v50mud6jUaHkCOqSQdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('cAotsZRc95h5IyQ4rNARm6uLKeuQMbxSr4Db80COuW8XQRUZozunXkisl2zpkYnUxmDhMX8yNwSXinTGJFZKkqcfPhjnoLVXZnGlAgpWyY9iYLtaKSbPI6NgOLL+B4q61peSVuEzMKTK3pPLLtGEigdB04t89/1O/w1cDnyilFU=')
 # 必須放上自己的Channel Secret
-handler = WebhookHandler('2dfd9021dc688c45c6b5cbc9bf18cabc')
+handler = WebhookHandler('d54bba779290dff794c281594d11c051')
 
-line_bot_api.push_message('U0b6441bd0ff804fe3f87793461cf615f', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('U262565b00a73c456ebba11b0bd1e7762', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -43,47 +43,146 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('電影推薦',message):
-        image_carousel_template_message = TemplateSendMessage(
-            alt_text='這是TemplateSendMessage',
-            template=ImageCarouselTemplate(
-                columns=[
-                    ImageCarouselColumn(
-                        image_url='https://i.imgur.com/jR5ClEy.png',
-                        action=PostbackAction(
-                            label='獅子王：木法沙',
-                            display_text='http://app2.atmovies.com.tw/poster/fmen13186482/',
-                            data='action=001'
-                        )
-                    ),
-                    ImageCarouselColumn(
-                        image_url='https://i.imgur.com/4zQ528x.png',
-                        action=PostbackAction(
-                            label='白雪公主',
-                            display_text='http://www.atmovies.com.tw/movie/fsen46208148/',
-                            data='action=002'
-                        )
-                    ),
-                    ImageCarouselColumn(
-                        image_url='https://i.imgur.com/rnBycmI.png',
-                        action=PostbackAction(
-                            label='麥塊電影',
-                            display_text='http://www.atmovies.com.tw/movie/faen83566834/',
-                            data='action=003'
-                        )
-                    ),
-                    ImageCarouselColumn(
-                        image_url='https://i.imgur.com/1tTl3ab.png',
-                        action=PostbackAction(
-                            label='玩具總動員5',
-                            display_text='http://www.atmovies.com.tw/movie/ften29355505/',
-                            data='action=004'
-                        )
-                    )
-                ]
-            )
+    if re.match('查看菜單',message):
+        # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
+        flex_message = FlexSendMessage(
+            alt_text='這是FlexSendMessage',
+            contents={
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "https://i.imgur.com/kNBl363.jpg",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "https://linecorp.com"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "md",
+    "action": {
+      "type": "uri",
+      "uri": "https://linecorp.com"
+    },
+    "contents": [
+      {
+        "type": "text",
+        "text": "台灣熱門景點",
+        "size": "xl",
+        "weight": "bold"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "icon",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/restaurant_regular_32.png"
+              },
+              {
+                "type": "text",
+                "text": "台東3天2夜遊",
+                "weight": "bold",
+                "margin": "sm",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "NT 15000",
+                "size": "sm",
+                "align": "end",
+                "color": "#aaaaaa"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "icon",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/restaurant_large_32.png"
+              },
+              {
+                "type": "text",
+                "text": "花蓮3天2夜遊",
+                "weight": "bold",
+                "margin": "sm",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "NT 18000",
+                "size": "sm",
+                "align": "end",
+                "color": "#aaaaaa"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "icon",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/restaurant_regular_32.png"
+              },
+              {
+                "type": "text",
+                "text": "墾丁3天兩夜遊",
+                "weight": "bold",
+                "margin": "sm",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "NT 16000",
+                "size": "sm",
+                "align": "end",
+                "color": "#aaaaaa"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "大腸包小腸、101、中正紀念堂",
+        "wrap": True,
+        "color": "#aaaaaa",
+        "size": "xxs"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "color": "#905c44",
+        "margin": "xxl",
+        "action": {
+          "type": "uri",
+          "label": "馬上瀏覽",
+          "uri": "https://en.wikipedia.org/wiki/Taiwan"
+        }
+      }
+    ]
+  }
+}
         )
-        line_bot_api.reply_message(event.reply_token, image_carousel_template_message)
+        line_bot_api.reply_message(event.reply_token, flex_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
