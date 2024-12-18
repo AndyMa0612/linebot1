@@ -54,7 +54,7 @@ def handle_message(event):
                         "type": "bubble",
                         "hero": {
                             "type": "image",
-                            "url": "https://i.imgur.com/eP1v8W9.jpg",  # Replace with actual image URL
+                            "url": "https://i.imgur.com/yVC3wkh.png",  # Updated image URL for 大牛排
                             "size": "full",
                             "aspectRatio": "20:13",
                             "aspectMode": "cover"
@@ -88,7 +88,7 @@ def handle_message(event):
                         "type": "bubble",
                         "hero": {
                             "type": "image",
-                            "url": "https://i.imgur.com/4zO6C2n.jpg",  # Replace with actual image URL
+                            "url": "https://i.imgur.com/Gfpsa4z.jpeg",  # Updated image URL for 海鮮義大利麵
                             "size": "full",
                             "aspectRatio": "20:13",
                             "aspectMode": "cover"
@@ -122,7 +122,7 @@ def handle_message(event):
                         "type": "bubble",
                         "hero": {
                             "type": "image",
-                            "url": "https://i.imgur.com/VmWhEFD.jpg",  # Replace with actual image URL
+                            "url": "https://i.imgur.com/bzHHguC.png",  # Updated image URL for 抹茶蛋糕
                             "size": "full",
                             "aspectRatio": "20:13",
                             "aspectMode": "cover"
