@@ -49,34 +49,34 @@ def handle_message(event):
             template=ImageCarouselTemplate(
                 columns=[
                     ImageCarouselColumn(
-                        image_url='https://i.imgur.com/kNBl363.jpg',
+                        image_url='https://i.imgur.com/jR5ClEy.png',
                         action=PostbackAction(
-                            label='台灣',
-                            display_text='台北101、逢甲夜市、墾丁...',
+                            label='獅子王：木法沙',
+                            display_text='http://app2.atmovies.com.tw/poster/fmen13186482/',
                             data='action=001'
                         )
                     ),
                     ImageCarouselColumn(
-                        image_url='https://i.imgur.com/GBPcUEP.png',
+                        image_url='https://i.imgur.com/4zQ528x.png',
                         action=PostbackAction(
-                            label='日本',
-                            display_text='金閣寺、淺草寺、北海道...',
+                            label='白雪公主',
+                            display_text='http://www.atmovies.com.tw/movie/fsen46208148/',
                             data='action=002'
                         )
                     ),
                     ImageCarouselColumn(
-                        image_url='https://i.imgur.com/kNBl363.jpg',
+                        image_url='https://i.imgur.com/rnBycmI.png',
                         action=PostbackAction(
-                            label='台灣',
-                            display_text='台北101、逢甲夜市、墾丁...',
+                            label='麥塊電影',
+                            display_text='http://www.atmovies.com.tw/movie/faen83566834/',
                             data='action=003'
                         )
                     ),
                     ImageCarouselColumn(
-                        image_url='https://i.imgur.com/kNBl363.jpg',
+                        image_url='https://i.imgur.com/1tTl3ab.png',
                         action=PostbackAction(
-                            label='台灣',
-                            display_text='台北101、逢甲夜市、墾丁...',
+                            label='玩具總動員5',
+                            display_text='http://www.atmovies.com.tw/movie/ften29355505/',
                             data='action=004'
                         )
                     )
